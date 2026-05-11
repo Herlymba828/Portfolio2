@@ -1,0 +1,23 @@
+{
+  "name": "MAMBOUNDOU MOULOUNGUI Herly Charmand - Portfolio Premium",
+  "short_name": "HCM Portfolio",
+  "description": "Portfolio professionnel premium de Herly Charmand Mamboundou, développeur Fullstack et DevOps Engineer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["business", "productivity", "developer"],
+  "icons": [
+    {
+      "src": "/og-image.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
