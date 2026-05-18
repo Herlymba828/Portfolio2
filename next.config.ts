@@ -23,14 +23,6 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Optimisations expérimentales
-  experimental: {
-    // Optimisation du CSS
-    optimizeCss: true,
-    // Désactiver les source maps en production
-    serverSourceMaps: false,
-  },
-
   // Configuration des headers pour le cache
   async headers() {
     return [
@@ -55,8 +47,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Minification avancée
-  swcMinify: true,
 };
 
 export default nextConfig;

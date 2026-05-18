@@ -139,8 +139,7 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
 }
 
 export default function ProjectsSection({ projects }: { projects: Project[] }) {
-  const featuredProject = projects.find((p) => p.featured);
-  const otherProjects = projects.filter((p) => !p.featured);
+  const featuredProjects = projects.slice(0, 6);
 
   return (
     <SectionWrapper id="projects" className="bg-background-secondary">
@@ -162,20 +161,13 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
             </p>
           </motion.div>
 
-          {/* Featured Project */}
-          {featuredProject && (
-            <motion.div variants={fadeInUp}>
-              <ProjectCard project={featuredProject} featured />
-            </motion.div>
-          )}
-
-          {/* Other Projects Grid */}
+          {/* Featured Projects Grid */}
           <motion.div
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {otherProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} featured />
             ))}
           </motion.div>
 

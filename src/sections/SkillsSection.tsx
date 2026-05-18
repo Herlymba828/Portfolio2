@@ -3,25 +3,80 @@
 import { useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import * as SimpleIcons from "react-icons/si";
+import {
+  SiAngular,
+  SiC,
+  SiCloudflare,
+  SiCplusplus,
+  SiCss,
+  SiDjango,
+  SiDocker,
+  SiGmail,
+  SiGo,
+  SiGrafana,
+  SiHtml5,
+  SiJavascript,
+  SiJenkins,
+  SiLaravel,
+  SiLinux,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNginx,
+  SiNodedotjs,
+  SiPhp,
+  SiPostgresql,
+  SiPrometheus,
+  SiPython,
+  SiReact,
+  SiRust,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
 import { fadeInUp, staggerContainer, scaleIn } from "@/animations/variants";
 import { skills, skillCategories, type SkillCategory, type Skill } from "@/data/skills";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import SectionWrapper from "@/components/SectionWrapper";
 
-function getSkillIcon(iconName: string) {
-  const icon = (SimpleIcons as any)[iconName];
-  // Filter out non-component exports
-  if (typeof icon === 'function' && icon.length === 1) {
-    return icon;
-  }
-  return null;
-}
+type SimpleIconComponent = React.ComponentType<{ className?: string }>;
+
+const skillIcons: Record<string, SimpleIconComponent> = {
+  SiAngular,
+  SiC,
+  SiCloudflare,
+  SiCplusplus,
+  SiCss,
+  SiDjango,
+  SiDocker,
+  SiGmail,
+  SiGo,
+  SiGrafana,
+  SiHtml5,
+  SiJavascript,
+  SiJenkins,
+  SiLaravel,
+  SiLinux,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNginx,
+  SiNodedotjs,
+  SiOpenldap: SiLinux,
+  SiPhp,
+  SiPostgresql,
+  SiPrometheus,
+  SiPython,
+  SiReact,
+  SiRust,
+  SiSamba: SiLinux,
+  SiTailwindcss,
+  SiTypescript,
+};
 
 function SkillCard({ skill }: { skill: Skill }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const IconComponent = getSkillIcon(skill.icon);
+  const IconComponent = skillIcons[skill.icon];
 
   return (
     <motion.div

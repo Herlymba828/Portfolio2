@@ -2,23 +2,20 @@
 
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { MapPin, CheckCircle } from "lucide-react";
-import * as LucideIcons from "lucide-react";
+import { Calendar, CheckCircle, Code2, FolderGit2, MapPin } from "lucide-react";
 import { fadeInUp, staggerContainer } from "@/animations/variants";
 import { about } from "@/data/about";
 import { personal } from "@/data/personal";
 import SectionWrapper from "@/components/SectionWrapper";
 
-type LucideIcon = React.ComponentType<any>;
+type LucideIcon = React.ComponentType<{ className?: string }>;
 
-function getIconComponent(iconName: string): LucideIcon | null {
-  const icon = (LucideIcons as any)[iconName];
-  // Filter out non-component exports like the Icon factory function
-  if (typeof icon === 'function' && icon.length === 1) {
-    return icon;
-  }
-  return null;
-}
+const statIcons: Record<string, LucideIcon> = {
+  Calendar,
+  CheckCircle,
+  Code2,
+  FolderGit2,
+};
 
 function AnimatedCounter({ value, isText = false }: { value: number | string; isText?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -112,7 +109,7 @@ export default function AboutSection() {
               className="grid grid-cols-2 gap-6"
             >
               {about.stats.map((stat, index) => {
-                const IconComponent = getIconComponent(stat.icon);
+                const IconComponent = statIcons[stat.icon];
 
                 return (
                   <motion.div

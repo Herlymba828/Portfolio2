@@ -7,7 +7,7 @@ import { domains, type Domain } from "@/data/certifications";
 import SectionWrapper from "@/components/SectionWrapper";
 
 function DomainCard({ domain }: { domain: Domain }) {
-  const IconComponent = (LucideIcons as unknown as Record<string, React.ComponentType<any>>)[domain.icon];
+  const IconComponent = (LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[domain.icon];
 
   const colorClasses = {
     violet: "from-accent-violet/20 to-accent-violet/5 border-accent-violet/30 hover:border-accent-violet",

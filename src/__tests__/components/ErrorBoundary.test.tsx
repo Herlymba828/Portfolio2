@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import ErrorBoundary, { SectionErrorFallback } from '@/components/ErrorBoundary';
 
 // Mock component that throws an error
@@ -43,7 +44,10 @@ describe('ErrorBoundary', () => {
 
   it('shows error details in development mode', () => {
     const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'development';
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: 'development',
+      configurable: true,
+    });
 
     render(
       <ErrorBoundary>
@@ -54,7 +58,10 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText(/Détails de l'erreur/)).toBeInTheDocument();
     expect(screen.getByText('Test error')).toBeInTheDocument();
 
-    process.env.NODE_ENV = originalEnv;
+    Object.defineProperty(process.env, 'NODE_ENV', {
+      value: originalEnv,
+      configurable: true,
+    });
   });
 
   it('calls retry function when retry button is clicked', () => {
@@ -81,11 +88,9 @@ describe('ErrorBoundary', () => {
 describe('SectionErrorFallback', () => {
   it('renders section error fallback with section name', () => {
     const mockRetry = jest.fn();
-    const mockError = new Error('Section error');
 
     render(
       <SectionErrorFallback 
-        error={mockError} 
         retry={mockRetry} 
         sectionName="Hero Section" 
       />
@@ -97,11 +102,9 @@ describe('SectionErrorFallback', () => {
 
   it('calls retry function when retry button is clicked', () => {
     const mockRetry = jest.fn();
-    const mockError = new Error('Section error');
 
     render(
       <SectionErrorFallback 
-        error={mockError} 
         retry={mockRetry} 
       />
     );

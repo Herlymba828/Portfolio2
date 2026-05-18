@@ -10,7 +10,8 @@
  */
 
 import dynamic from "next/dynamic";
-import { getGithubProjects } from "@/lib/github";
+import { projects } from "@/data/projects";
+import ClientEffects from "@/components/ClientEffects";
 
 // ─── IMPORTS STATIQUES - SECTIONS CRITIQUES ──────────────────────────────────
 // Ces sections sont chargées immédiatement car elles sont visibles au-dessus de la ligne de flottaison
@@ -63,8 +64,6 @@ const ContactSection = dynamic(() => import("@/sections/ContactSection"), {
 // ─── COMPOSANTS CLIENT - INTERFACE UTILISATEUR ───────────────────────────────
 // Ces composants nécessitent l'exécution côté client pour les interactions
 import Navbar from "@/components/Navbar";
-import LoadingScreen from "@/components/LoadingScreen";
-import CursorEffect from "@/components/CursorEffect";
 
 /**
  * Composant principal de la page d'accueil
@@ -78,20 +77,12 @@ import CursorEffect from "@/components/CursorEffect";
  * 
  * @returns {JSX.Element} Page d'accueil complète du portfolio
  */
-export default async function Home() {
-  // ─── RÉCUPÉRATION DES DONNÉES ─────────────────────────────────────────────
-  // Récupère les projets GitHub au moment du build (SSG) avec revalidation 24h
-  // Fallback automatique vers les projets statiques si l'API GitHub est indisponible
-  const githubProjects = await getGithubProjects();
-
+export default function Home() {
   return (
     <>
       {/* ─── COMPOSANTS GLOBAUX ─────────────────────────────────────────── */}
       {/* Écran de chargement avec barre de progression et animations */}
-      <LoadingScreen />
-      
-      {/* Effet de curseur personnalisé avec animation magnétique */}
-      <CursorEffect />
+      <ClientEffects />
       
       {/* Navigation fixe avec glassmorphisme et menu mobile */}
       <Navbar />
@@ -108,7 +99,7 @@ export default async function Home() {
         <SkillsSection />
         
         {/* Section Projets - Projets GitHub + statiques avec détails techniques */}
-        <ProjectsSection projects={githubProjects} />
+        <ProjectsSection projects={projects} />
         
         {/* ─── SECTIONS CHARGÉES DYNAMIQUEMENT ─────────────────────────── */}
         {/* Ces sections se chargent de manière asynchrone pour optimiser les performances */}

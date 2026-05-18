@@ -25,26 +25,25 @@ export default function LoadingScreen() {
           setTimeout(() => {
             setIsLoading(false);
             sessionStorage.setItem("visited", "true");
-          }, 200);
+          }, 100);
           return 100;
         }
-        return prev + Math.random() * 12;
+        return prev + 25;
       });
-    }, 80);
+    }, 30);
 
     // Minimum loading time for smooth UX
     const minLoadTime = setTimeout(() => {
-      if (progress >= 100) {
-        setIsLoading(false);
-        sessionStorage.setItem("visited", "true");
-      }
-    }, 1200);
+      setProgress(100);
+      setIsLoading(false);
+      sessionStorage.setItem("visited", "true");
+    }, 350);
 
     return () => {
       clearInterval(interval);
       clearTimeout(minLoadTime);
     };
-  }, [progress]);
+  }, []);
 
   return (
     <AnimatePresence mode="wait">

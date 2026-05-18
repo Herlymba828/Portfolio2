@@ -15,16 +15,12 @@ export default function AnalyticsProvider({ children }: AnalyticsProviderProps) 
     // Initialize analytics on mount
     initPrivacyCompliantAnalytics();
 
-    // Register service worker for PWA
-    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then((registration) => {
-          console.log('Service Worker registered successfully:', registration);
-        })
-        .catch((error) => {
-          console.error('Service Worker registration failed:', error);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister();
         });
+      });
     }
   }, []);
 

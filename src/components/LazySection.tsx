@@ -16,13 +16,13 @@ function SectionSkeleton({ className = "" }: { className?: string }) {
 }
 
 // HOC pour lazy load des sections
-export function lazySection<T extends ComponentType<any>>(
-  importFn: () => Promise<{ default: T }>,
+export function lazySection<P extends Record<string, unknown>>(
+  importFn: () => Promise<{ default: ComponentType<P> }>,
   skeletonClassName?: string
 ) {
   const LazyComponent = lazy(importFn);
 
-  return function LazySectionWrapper(props: any) {
+  return function LazySectionWrapper(props: P) {
     return (
       <Suspense fallback={<SectionSkeleton className={skeletonClassName} />}>
         <LazyComponent {...props} />
