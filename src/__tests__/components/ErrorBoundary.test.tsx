@@ -43,25 +43,16 @@ describe('ErrorBoundary', () => {
   });
 
   it('shows error details in development mode', () => {
-    const originalEnv = process.env.NODE_ENV;
-    Object.defineProperty(process.env, 'NODE_ENV', {
-      value: 'development',
-      configurable: true,
-    });
-
+    // NODE_ENV is inlined at build/transform time by Next.js's SWC transform,
+    // so it can't be toggled at test runtime — use the explicit prop instead.
     render(
-      <ErrorBoundary>
+      <ErrorBoundary showErrorDetails>
         <ThrowError shouldThrow={true} />
       </ErrorBoundary>
     );
 
     expect(screen.getByText(/Détails de l'erreur/)).toBeInTheDocument();
     expect(screen.getByText('Test error')).toBeInTheDocument();
-
-    Object.defineProperty(process.env, 'NODE_ENV', {
-      value: originalEnv,
-      configurable: true,
-    });
   });
 
   it('calls retry function when retry button is clicked', () => {
@@ -71,15 +62,17 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    const retryButton = screen.getByText('Réessayer');
-    fireEvent.click(retryButton);
-
-    // After retry, component should try to render children again
+    // Simulate the underlying issue being resolved: children no longer throw.
+    // The boundary still shows the fallback because `hasError` state persists
+    // until retry is triggered.
     rerender(
       <ErrorBoundary>
         <ThrowError shouldThrow={false} />
       </ErrorBoundary>
     );
+
+    const retryButton = screen.getByText('Réessayer');
+    fireEvent.click(retryButton);
 
     expect(screen.getByText('No error')).toBeInTheDocument();
   });

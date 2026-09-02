@@ -4,7 +4,7 @@
  * Cette page utilise Next.js 15 App Router avec une stratégie de chargement optimisée :
  * - Imports statiques pour les sections critiques (Hero, About, Skills, Projects)
  * - Imports dynamiques pour les sections non-critiques (Experience, Education, etc.)
- * - Récupération des projets GitHub au moment du build (SSG)
+ * - Projets vedettes maintenus statiquement dans src/data/projects.ts
  * 
  * @author MAMBOUNDOU MOULOUNGUI Herly Charmand
  */
@@ -69,7 +69,6 @@ import Navbar from "@/components/Navbar";
  * Composant principal de la page d'accueil
  * 
  * Fonctionnalités :
- * - Récupération des projets GitHub avec cache 24h
  * - Écran de chargement premium avec animations
  * - Effet de curseur personnalisé
  * - Navigation fixe avec highlighting des sections actives
@@ -98,7 +97,7 @@ export default function Home() {
         {/* Section Compétences - 40+ technologies avec barres de progression */}
         <SkillsSection />
         
-        {/* Section Projets - Projets GitHub + statiques avec détails techniques */}
+        {/* Section Projets - Projets vedettes avec détails techniques */}
         <ProjectsSection projects={projects} />
         
         {/* ─── SECTIONS CHARGÉES DYNAMIQUEMENT ─────────────────────────── */}

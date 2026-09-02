@@ -8,16 +8,19 @@ declare global {
 }
 
 // Google Analytics configuration
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+// Read lazily (not captured at module-load time) so it reflects the current
+// env at call time — important for tests and for env vars injected at runtime.
+export const getGaTrackingId = () => process.env.NEXT_PUBLIC_GA_ID;
 
 // Initialize Google Analytics
 export const initGA = () => {
-  if (!GA_TRACKING_ID || typeof window === "undefined") return;
+  const gaTrackingId = getGaTrackingId();
+  if (!gaTrackingId || typeof window === "undefined") return;
 
   // Load Google Analytics script
   const script = document.createElement("script");
   script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`;
   document.head.appendChild(script);
 
   // Initialize dataLayer and gtag
@@ -25,9 +28,9 @@ export const initGA = () => {
   window.gtag = function gtag(...args: unknown[]) {
     window.dataLayer?.push(args);
   };
-  
+
   window.gtag("js", new Date());
-  window.gtag("config", GA_TRACKING_ID, {
+  window.gtag("config", gaTrackingId, {
     page_title: document.title,
     page_location: window.location.href,
   });
@@ -35,9 +38,10 @@ export const initGA = () => {
 
 // Track page views
 export const trackPageView = (url: string, title?: string) => {
-  if (!GA_TRACKING_ID || !window.gtag) return;
+  const gaTrackingId = getGaTrackingId();
+  if (!gaTrackingId || !window.gtag) return;
 
-  window.gtag("config", GA_TRACKING_ID, {
+  window.gtag("config", gaTrackingId, {
     page_title: title || document.title,
     page_location: url,
   });
@@ -50,7 +54,7 @@ export const trackEvent = (
   label?: string,
   value?: number
 ) => {
-  if (!GA_TRACKING_ID || !window.gtag) return;
+  if (!getGaTrackingId() || !window.gtag) return;
 
   window.gtag("event", action, {
     event_category: category,

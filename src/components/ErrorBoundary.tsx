@@ -13,6 +13,8 @@ interface ErrorBoundaryState {
 interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ComponentType<{ error: Error; retry: () => void }>;
+  /** Show the raw error message in the fallback UI. Defaults to non-production environments. */
+  showErrorDetails?: boolean;
 }
 
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -67,7 +69,8 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
               </p>
             </div>
 
-            {process.env.NODE_ENV === "development" && this.state.error && (
+            {(this.props.showErrorDetails ?? process.env.NODE_ENV === "development") &&
+              this.state.error && (
               <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg text-left">
                 <h3 className="font-semibold text-red-800 dark:text-red-200 mb-2">
                   Détails de l&apos;erreur (développement):

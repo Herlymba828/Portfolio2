@@ -180,7 +180,7 @@ export default function HeroSection() {
                   href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full glass-light hover:glass transition-all hover:scale-110"
+                  className="inline-flex items-center justify-center p-3 rounded-full glass-light hover:glass transition-all hover:scale-110"
                   aria-label="GitHub"
                 >
                   <GitHubLogoIcon className="h-5 w-5 text-text-muted hover:text-accent-violet transition-colors" />
@@ -192,7 +192,7 @@ export default function HeroSection() {
                   href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full glass-light hover:glass transition-all hover:scale-110"
+                  className="inline-flex items-center justify-center p-3 rounded-full glass-light hover:glass transition-all hover:scale-110"
                   aria-label="LinkedIn"
                 >
                   <LinkedInLogoIcon className="h-5 w-5 text-text-muted hover:text-accent-cyan transition-colors" />
@@ -202,7 +202,7 @@ export default function HeroSection() {
               <MagneticButton>
                 <a
                   href={`mailto:${personal.email}`}
-                  className="p-3 rounded-full glass-light hover:glass transition-all hover:scale-110"
+                  className="inline-flex items-center justify-center p-3 rounded-full glass-light hover:glass transition-all hover:scale-110"
                   aria-label="Email"
                 >
                   <Mail className="h-5 w-5 text-text-muted hover:text-accent-blue transition-colors" />
