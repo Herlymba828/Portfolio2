@@ -86,8 +86,8 @@ export const personal: PersonalData = {
   github: "https://github.com/Herlymba828",
 
   // ─── DOCUMENTS ─────────────────────────────────────────────────────────────
-  /** Chemin vers le CV PDF téléchargeable */
-  cvFile: "/MAMBOUNDOU MOULOUNGUI Herly Charmand.pdf",
+  /** Lien Canva du CV, toujours synchronisé avec la dernière version éditée */
+  cvFile: "https://canva.link/7uivxc7tmkd3qwp",
 
   // ─── STATUT PROFESSIONNEL ─────────────────────────────────────────────────
   /** Disponibilité pour de nouveaux projets (affiché avec badge vert) */
