@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { NAV_LINKS } from "@/constants";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useLenis } from "@/hooks/useLenis";
@@ -58,7 +59,16 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
             aria-label="Retour à l'accueil"
           >
-            HCM
+            <span className="relative block h-10 w-10 overflow-hidden rounded-full border border-white/20 shadow-lg">
+              <Image
+                src="/profile.jpg"
+                alt="Herly Charmand Mamboundou"
+                fill
+                sizes="40px"
+                className="object-cover object-center"
+                priority
+              />
+            </span>
           </motion.a>
 
           {/* Desktop Navigation */}

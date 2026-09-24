@@ -21,6 +21,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { Mail, ArrowDown } from "lucide-react";
 import { heroContainer, heroItem } from "@/animations/variants";
@@ -222,8 +223,15 @@ export default function HeroSection() {
               
               {/* Avatar Container */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full glass-card p-2 animate-float">
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-accent-violet/20 to-accent-cyan/20 flex items-center justify-center text-8xl font-bold gradient-text">
-                  HCM
+                <div className="relative w-full h-full overflow-hidden rounded-full bg-gradient-to-br from-accent-violet/20 to-accent-cyan/20">
+                  <Image
+                    src="/profile.jpg"
+                    alt="Herly Charmand Mamboundou"
+                    fill
+                    sizes="(max-width: 768px) 256px, 320px"
+                    className="object-cover object-center"
+                    priority
+                  />
                 </div>
               </div>
 

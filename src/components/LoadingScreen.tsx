@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { loadingContainer, loadingText } from "@/animations/variants";
 
 export default function LoadingScreen() {
@@ -68,70 +69,16 @@ export default function LoadingScreen() {
                 <div className="absolute inset-6 rounded-full bg-gradient-premium animate-pulse-premium" style={{ animationDelay: "0.9s" }}></div>
               </div>
               
-              {/* Initials HCM with enhanced animation */}
-              <svg
-                width="120"
-                height="120"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute inset-0 text-accent-violet"
-              >
-                <motion.path
-                  d="M20 30 L20 90 M20 60 L40 60 M40 30 L40 90"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
+              <div className="absolute inset-0 overflow-hidden rounded-full border-2 border-white/20 shadow-xl">
+                <Image
+                  src="/profile.jpg"
+                  alt="Herly Charmand Mamboundou"
+                  fill
+                  sizes="120px"
+                  className="object-cover object-center"
+                  priority
                 />
-                <motion.path
-                  d="M55 30 Q70 60 55 90 M55 30 Q70 60 85 30 M85 90 Q70 60 85 30"
-                  stroke="url(#gradient1)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
-                />
-                <motion.path
-                  d="M100 30 L100 70 Q100 90 115 90 M100 30 L115 30"
-                  stroke="url(#gradient2)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
-                />
-                <defs>
-                  <linearGradient
-                    id="gradient1"
-                    x1="55"
-                    y1="30"
-                    x2="85"
-                    y2="90"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#7c3aed" />
-                    <stop offset="1" stopColor="#06b6d4" />
-                  </linearGradient>
-                  <linearGradient
-                    id="gradient2"
-                    x1="100"
-                    y1="30"
-                    x2="115"
-                    y2="90"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#06b6d4" />
-                    <stop offset="1" stopColor="#3b82f6" />
-                  </linearGradient>
-                </defs>
-              </svg>
+              </div>
             </div>
 
             {/* Progress Bar */}

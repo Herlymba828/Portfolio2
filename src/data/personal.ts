@@ -87,7 +87,7 @@ export const personal: PersonalData = {
 
   // ─── DOCUMENTS ─────────────────────────────────────────────────────────────
   /** Lien Canva du CV, toujours synchronisé avec la dernière version éditée */
-  cvFile: "https://canva.link/7uivxc7tmkd3qwp",
+  cvFile: "https://canva.link/m4yxkbl0cj2f2qs",
 
   // ─── STATUT PROFESSIONNEL ─────────────────────────────────────────────────
   /** Disponibilité pour de nouveaux projets (affiché avec badge vert) */
